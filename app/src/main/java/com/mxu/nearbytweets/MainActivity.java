@@ -20,6 +20,9 @@ import com.google.android.gms.location.LocationServices;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
+
+import twitter4j.Status;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
@@ -85,11 +88,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()) {
-            //TODO: implement stuff here
+            new TwitterHelper(this).execute(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         } else {
             Toast.makeText(this, "No network connection available", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     protected void locationRequestDenied() {
         //TODO: If location access was denied then ask user to input a zip code
