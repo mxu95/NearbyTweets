@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()) {
+            Toast.makeText(this, "Retrieving tweets...", Toast.LENGTH_LONG).show();
             new TwitterHelper(this).execute(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         } else {
             Toast.makeText(this, "No network connection available", Toast.LENGTH_SHORT).show();

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -70,7 +71,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions().position(locations.get(i)).title(sourcesAndTexts.get(i)));
         }
 
-        LatLng currentLocation = new LatLng(intent.getDoubleExtra("latitude", -38), intent.getDoubleExtra("longitude", 76));
+        LatLng currentLocation = new LatLng(intent.getDoubleExtra("current-latitude", 38), intent.getDoubleExtra("current-longitude", -76));
+        mMap.addMarker(new MarkerOptions().position(currentLocation).title("Your Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(7.0f));
     }
 }
